@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title id="title"></title>
+    <link href="./style/tailwind.css" rel="stylesheet">
+    <link href="./style/style.css" rel="stylesheet">
+</head>
+
+<body class="min-h-screen flex flex-col justify-center">
+    <div class="container w-max min-w-auto">
+        <div class="relative">
+            <!-- Logo and Title -->
+            <div class="flex items-center mb-8 space-x-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-white flex items-center justify-center shadow-lg">
+                    <img alt="Logo" class="w-auto h-auto object-contain" src="./xvann_logo.png" />
+                </div>
+                <h2 class="text-white font-bold uppercase tracking-widest select-none">
+                    LAURA <span style="color:orange">AK</span>
+                </h2>
+            </div>
+
+            <!-- Main Content -->
+            <div class="mb-8">
+                <h1 class="text-white font-extrabold text-2xl md:text-3xl leading-tight mb-5">Status Anda</h1>
+                <p class="text-white text-base mb-8">Informasi detail penggunaan internet Anda</p>
+                
+                <div class="bg-[#6f00ff] bg-opacity-10 rounded-xl p-8 shadow-lg backdrop-blur-md border border-white border-opacity-20">
+                    <table class="w-full text-white">
+                        <tbody>
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-user-circle-o">&#xf2be;</i> Username</td>
+                                <td class="py-3">$(username)</td>
+                            </tr>
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-sitemap">&#xf0e8;</i> IP Address</td>
+                                <td class="py-3">$(ip)</td>
+                            </tr>
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-barcode">&#xe80a;</i> MAC Address</td>
+                                <td class="py-3">$(mac)</td>
+                            </tr>
+                            $(if session-time-left)
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-exchange">&#xf0ec;</i> Connected / Left</td>
+                                <td class="py-3">$(uptime) / $(session-time-left)</td>
+                            </tr>
+                            $(else)
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-exchange">&#xf0ec;</i> Connected</td>
+                                <td class="py-3">$(uptime)</td>
+                            </tr>
+                            $(endif)
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-upload">&#xe808;</i> Download / Upload</td>
+                                <td class="py-3">$(bytes-out-nice) / $(bytes-in-nice)</td>
+                            </tr>
+                            $(if limit-bytes-total)
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-hourglass-2">&#xf252;</i> Sisa Kuota</td>
+                                <td class="py-3">
+                                    <script language="javascript">
+                                        result = ($(limit-bytes-total)/1000000).toFixed(2)
+                                        document.write(result + " MiB")
+                                    </script>
+                                </td>
+                            </tr>
+                            $(else)
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-clock">&#xe805;</i> Sisa Waktu</td>
+                                <td class="py-3">$(session-time-left)</td>
+                            </tr>
+                            $(endif)
+                            $(if blocked == 'yes')
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i class="icon icon-check">&#xe807;</i> Status</td>
+                                <td class="py-3"><div style="color: #FF8080"><a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div></td>
+                            </tr>
+                            $(elif refresh-timeout)
+                            <tr class="border-b border-white border-opacity-10">
+                                <td class="py-3"><i <i class="icon icon-arrows-cw">&#xe800;</i> Refresh</td>
+                                <td class="py-3">$(refresh-timeout)</td>
+                            </tr>
+                            $(endif)
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Logout Button -->
+                <div class="mt-8">
+                    <a href="$(link-logout)" class="block w-full py-4 px-6 bg-[#1a237e] hover:bg-[#151a6e] text-white font-semibold rounded-lg text-center transition-all duration-300 shadow-lg hover:shadow-xl">
+                        <i class="icon icon-logout">&#xe804;</i>
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full mt-8 text-center text-white text-sm select-none">
+        <p>&copy; 2024 Laura AK. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    $(if chap-id)
+    <script type="text/javascript" src="md5.js"></script>
+    $(endif)
+    <script>
+      var hostname = window.location.hostname;
+      document.getElementById('title').innerHTML = hostname  + " > status";
+    </script>
+</body>
+</html>

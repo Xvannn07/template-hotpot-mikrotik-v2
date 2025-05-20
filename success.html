@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title id="title"></title>
+    <link href="./style/tailwind.css" rel="stylesheet">
+    <link href="./style/style.css" rel="stylesheet">
+    $(if refresh-timeout)
+    <script>
+        setTimeout(function(){
+            location.href = './status';
+        }, 4000)
+    </script>
+    $(endif)
+</head>
+
+<body class="min-h-screen flex flex-col justify-center">
+    <div class="container w-max min-w-auto">
+        <div class="relative">
+            <!-- Logo and Title -->
+            <div class="flex items-center mb-8 space-x-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden bg-white flex items-center justify-center shadow-lg">
+                    <img alt="Logo" class="w-auto h-auto object-contain" src="./xvann_logo.png" />
+                </div>
+                <h2 class="text-white font-bold uppercase tracking-widest select-none">
+                    LAURA <span style="color:orange">AK</span>
+                </h2>
+            </div>
+
+            <!-- Main Content -->
+            <div class="mb-8">
+                <h1 class="text-white font-extrabold text-2xl md:text-3xl leading-tight mb-5">Berhasil Terhubung!</h1>
+                <p class="text-white text-base mb-8">Anda telah berhasil login ke jaringan</p>
+                
+                <div class="bg-[#6f00ff] bg-opacity-10 rounded-xl p-8 shadow-lg backdrop-blur-md border border-white border-opacity-20">
+                    <div class="text-white text-center">
+                        $(if login-by == 'trial')
+                            <div class="flex flex-col items-center space-y-4">
+                                <i class="icon icon-user-circle-o text-6xl">&#xf2be;</i>
+                                <h3 class="text-2xl font-semibold">Selamat Datang Trial User</h3>
+                            </div>
+                        $(elif login-by != 'mac')
+                            <div class="flex flex-col items-center space-y-4">
+                                <i class="icon icon-user-circle-o text-6xl">&#xf2be;</i>
+                                <h3 class="text-2xl font-semibold" id="user">Selamat Datang $(username)</h3>
+                            </div>
+                        $(endif)
+                        
+                        <div class="mt-8">
+                            <h3 class="text-xl mb-4">Anda terhubung ke jaringan</h3>
+                            <p class="text-2xl font-bold" id="dname"></p>
+                        </div>
+
+                        <div class="mt-8">
+                            <a href="./status" class="inline-block py-4 px-8 bg-white text-[#2a3a9d] font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+                                <i class="icon icon-check">&#xe807;</i>
+                                Cek Status
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full mt-8 text-center text-white text-sm select-none">
+        <p>&copy; 2024 Laura AK. All rights reserved.</p>
+    </footer>
+
+    <script type="text/javascript">
+        document.getElementById('title').innerHTML = window.location.hostname + " > success";    
+        document.getElementById('dname').innerHTML = window.location.hostname;    
+    </script>
+</body>
+</html>
